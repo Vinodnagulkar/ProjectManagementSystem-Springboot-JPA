@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author vinod.nagulkar
+ *
+ */
 @Entity
 @Component
 @Table

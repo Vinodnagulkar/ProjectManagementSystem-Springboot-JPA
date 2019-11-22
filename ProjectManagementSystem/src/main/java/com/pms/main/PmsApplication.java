@@ -6,6 +6,10 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+/**
+ * @author vinod.nagulkar
+ *
+ */
 @SpringBootApplication
 @ComponentScan("com.pms")
 @EntityScan({ "com.pms.model" })
