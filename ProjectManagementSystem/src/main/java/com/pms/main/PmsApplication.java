@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @author vinod.nagulkar
  *
  */
+/*This is main class*/
 @SpringBootApplication
 @ComponentScan("com.pms")
 @EntityScan({ "com.pms.model" })
@@ -18,7 +19,6 @@ public class PmsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PmsApplication.class, args);
-
 		System.out.println("Hello..PMS started..!");
 	}
 
