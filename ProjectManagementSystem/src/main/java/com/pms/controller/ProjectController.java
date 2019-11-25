@@ -32,7 +32,7 @@ public class ProjectController
 		return projectServiceApi.addProject(project);
 	}
 	
-	/* This method fetch all project objects from database and returns it through URL 
+	/* This API fetch all project objects from database and returns it through URL 
 	 * @GetMapping maps the GET request to the particular method 
 	 * Return: List of project object*/
 	@GetMapping("/pms/project/getAllProjects")
@@ -41,7 +41,7 @@ public class ProjectController
 		return projectServiceApi.getAllProjects();
 	}
 	
-	/* This method fetch the project object by ID from database and returns it through URL 
+	/* This API fetch the project object by ID from database and returns it through URL 
 	 * @GetMapping maps the GET request to the particular method 
 	 * Return: Project object */
 	@GetMapping("/pms/project/getProjectById/{id}")
@@ -51,7 +51,7 @@ public class ProjectController
 	}
 	
 	
-	/*This method gets the input as Project object and ID of the project which is going to update
+	/*This API gets the input as Project object and ID of the project which is going to update
 	 *@PutMapping annotation for mapping HTTP PUT requests onto specific handler methods.
 	 *@PathVariable annotation is used to bind the URI template variables to the handler method parameters*/
 	@PutMapping("/pms/project/updateProject/{id}")
@@ -60,7 +60,7 @@ public class ProjectController
 		return projectServiceApi.updateProject(project,id);
 	}
 	
-	/*This method gets ID as input and delete that Project by ID
+	/*This API gets ID as input and delete that Project by ID
 	 *@DeleteMapping annotation for mapping HTTP DELETE requests onto specific handler methods
 	 *@PathVariable annotation is used to bind the URI template variables to the handler method parameters*/
 	@DeleteMapping("/pms/project/deleteProject/{id}")
