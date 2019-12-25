@@ -14,41 +14,57 @@ import com.pms.service.ProjectServiceApi;
 
 /**
  * @author vinod.nagulkar
- *
+ * This is service implementation class which have CRUD methods that contains business logic
  */
 
-/*This is service implementation class which have CRUD methods that contains business logic.*/
 @Service
 public class ProjectServiceImpl implements ProjectServiceApi {
+	
+	/**
+	 * This is ProjectRepository instance
+	 */
 	@Autowired
 	ProjectRepository projectRepository;
 	
+	/**
+	 * This is Date and Time API instance
+	 */
 	DateFormat df = new SimpleDateFormat("dd/MM/yy");
 	Date currentDate = new Date(); 
 
-	/*This method gets Project object as input and send it to DAO layer.*/
+	/**
+	 * This method gets Project object as input and send it to DAO layer.
+	 * */
 	@Override
 	public Project addProject(Project project) {
 		// TODO Auto-generated method stub
 		return projectRepository.save(project);
 	}
 
-	
-	/*This method returns all Project objects in a List which is fetch from database.*/
+	/**
+	 * This method returns all Project objects in a List which is fetch from database.
+	 * @return List of Project object
+	 * */
 	@Override
 	public List<Project> getAllProjects() {
 		// TODO Auto-generated method stub
 		return projectRepository.findAll();
 	}
 
-	/* This method fetch the project object by ID from database and returns it.*/
+	/** 
+	 * This method fetch the project object by ID from database and returns it.
+	 * @return Project object
+	 * */
 	@Override
 	public Project getProjectById(Long id) {
 		// TODO Auto-generated method stub
 		return projectRepository.getOne(id);
 	}
 	
-	/*This method gets the input as Project object and ID of the project which is going to update*/
+	/**
+	 * This method gets the input as Project object and ID of the project which is going to update
+	 * @return Project object
+	 * */
 	@Override
 	public Project updateProject(Project project,Long id) {
 		// TODO Auto-generated method stub
@@ -60,7 +76,9 @@ public class ProjectServiceImpl implements ProjectServiceApi {
 		return projectRepository.save(p);
 	}
 
-	/*This method gets ID as input and delete that Project object by ID*/
+	/**
+	 * This method gets ID as input and delete that Project object from DB
+	 * */
 	@Override
 	public void deleteProject(Long id) {
 		// TODO Auto-generated method stub

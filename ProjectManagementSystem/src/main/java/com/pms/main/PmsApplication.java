@@ -8,9 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * @author vinod.nagulkar
- *
+ * This is main class
  */
-/*This is main class*/
 @SpringBootApplication
 @ComponentScan("com.pms")
 @EntityScan({ "com.pms.model" })

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author vinod.nagulkar
- *
+ * This is project entity 
  */
 @Entity
 @Component

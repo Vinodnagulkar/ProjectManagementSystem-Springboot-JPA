@@ -18,51 +18,61 @@ import com.pms.service.ProjectServiceApi;
  *
  */
 @RestController
-public class ProjectController 
+public class ProjectController
 {
 	@Autowired
 	ProjectServiceApi projectServiceApi;
 	
-	/*This method gets the project object as input and sends it to service layer
+	/**
+	 * This API gets the project object as input and sends it to service layer
 	 * @PostMapping is used to handle POST type of request method
-	 * @RequestBody annotation binds the HTTPRequest body to the domain object. */
+	 * @RequestBody annotation binds the HTTPRequest body to the domain object.
+	 * */
 	@PostMapping("/pms/project/addProject")
 	public Project addProject(@RequestBody Project project) 
 	{
 		return projectServiceApi.addProject(project);
 	}
 	
-	/* This API fetch all project objects from database and returns it through URL 
+	/** 
+	 * This API fetch all project objects from database and returns it through URL 
 	 * @GetMapping maps the GET request to the particular method 
-	 * Return: List of project object*/
+	 *@return List of project objects
+	 * */
 	@GetMapping("/pms/project/getAllProjects")
 	public List<Project>getAllProjects()
 	{
 		return projectServiceApi.getAllProjects();
 	}
 	
-	/* This API fetch the project object by ID from database and returns it through URL 
+	/** 
+	 * This API fetch the project object by ID from database and returns it through URL 
 	 * @GetMapping maps the GET request to the particular method 
-	 * Return: Project object */
+	 * @return: Project object 
+	 * */
 	@GetMapping("/pms/project/getProjectById/{id}")
 	public Project getProjectById(@PathVariable Long id) 
 	{
 	return	projectServiceApi.getProjectById(id);
 	}
 	
-	
-	/*This API gets the input as Project object and ID of the project which is going to update
+	/**
+	 * This API gets the input as Project object and ID of the project which is going to update
 	 *@PutMapping annotation for mapping HTTP PUT requests onto specific handler methods.
-	 *@PathVariable annotation is used to bind the URI template variables to the handler method parameters*/
+	 *@PathVariable annotation is used to bind the URI template variables to the handler method parameters
+	 *@return Project object
+	 **/
 	@PutMapping("/pms/project/updateProject/{id}")
 	public Project updateProject( @RequestBody Project project,@PathVariable Long id) 
 	{
 		return projectServiceApi.updateProject(project,id);
 	}
 	
-	/*This API gets ID as input and delete that Project by ID
+	/**
+	 * This API gets ID as input and delete that Project by ID
 	 *@DeleteMapping annotation for mapping HTTP DELETE requests onto specific handler methods
-	 *@PathVariable annotation is used to bind the URI template variables to the handler method parameters*/
+	 *@PathVariable annotation is used to bind the URI template variables to the handler method parameters
+	 **/
 	@DeleteMapping("/pms/project/deleteProject/{id}")
 	public void deleteProject(@PathVariable Long id) {
 	projectServiceApi.deleteProject(id);
