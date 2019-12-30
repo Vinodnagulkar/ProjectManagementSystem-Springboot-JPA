@@ -1,6 +1,7 @@
 package com.pms.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,6 @@ import com.pms.util.PmsURI;
 
 /**
  * @author vinod.nagulkar
- *
  */
 @RestController
 public class ProjectController
@@ -58,13 +58,14 @@ public class ProjectController
 	 * @return: Project object 
 	 * */
 	@GetMapping(PmsURI.GET_PROJECT)
-	public ResponseEntity<Project> getProjectById(@PathVariable Long id) 
+	public ResponseEntity<Optional<Project>> getProjectById(@PathVariable Long id) 
 	{
-		Project project=projectServiceApi.getProjectById(id);
-		if(project!=null)
-			return new ResponseEntity<Project>(project,HttpStatus.FOUND);
+		Optional<Project> project=projectServiceApi.getProjectById(id);
+		System.out.println(project+"************************");
+		if(project.isPresent()) 
+			return new ResponseEntity<Optional<Project>>(project,HttpStatus.FOUND);
 		else
-			return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Optional<Project>>(HttpStatus.NOT_FOUND);
 	}
 	
 	/**
