@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,9 +57,9 @@ public class ProjectServiceImpl implements ProjectServiceApi {
 	 * @return Project object
 	 * */
 	@Override
-	public Project getProjectById(Long id) {
+	public Optional<Project> getProjectById(Long id) {
 		// TODO Auto-generated method stub
-		return projectRepository.getOne(id);
+		return projectRepository.findById(id);
 	}
 	
 	/**
