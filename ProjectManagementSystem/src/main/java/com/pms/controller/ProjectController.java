@@ -3,6 +3,8 @@ package com.pms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.pms.model.Project;
 import com.pms.service.ProjectServiceApi;
+import com.pms.util.PmsURI;
 
 /**
  * @author vinod.nagulkar
@@ -28,10 +31,10 @@ public class ProjectController
 	 * @PostMapping is used to handle POST type of request method
 	 * @RequestBody annotation binds the HTTPRequest body to the domain object.
 	 * */
-	@PostMapping("/pms/project/addProject")
-	public Project addProject(@RequestBody Project project) 
+	@PostMapping(PmsURI.ADD_PROJECT)
+	public ResponseEntity<?> addProject(@RequestBody Project project) 
 	{
-		return projectServiceApi.addProject(project);
+		 return new ResponseEntity<Project>(projectServiceApi.addProject(project),HttpStatus.OK);
 	}
 	
 	/** 
@@ -39,10 +42,14 @@ public class ProjectController
 	 * @GetMapping maps the GET request to the particular method 
 	 *@return List of project objects
 	 * */
-	@GetMapping("/pms/project/getAllProjects")
-	public List<Project>getAllProjects()
+	@GetMapping(PmsURI.GET_ALL_PROJECTS)
+	public ResponseEntity<?>getAllProjects()
 	{
-		return projectServiceApi.getAllProjects();
+		List<Project>projectList=projectServiceApi.getAllProjects();
+		if(!projectList.isEmpty())
+		return new ResponseEntity<>(projectList,HttpStatus.OK);
+		else
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	/** 
@@ -50,10 +57,14 @@ public class ProjectController
 	 * @GetMapping maps the GET request to the particular method 
 	 * @return: Project object 
 	 * */
-	@GetMapping("/pms/project/getProjectById/{id}")
-	public Project getProjectById(@PathVariable Long id) 
+	@GetMapping(PmsURI.GET_PROJECT)
+	public ResponseEntity<Project> getProjectById(@PathVariable Long id) 
 	{
-	return	projectServiceApi.getProjectById(id);
+		Project project=projectServiceApi.getProjectById(id);
+		if(project!=null)
+			return new ResponseEntity<Project>(project,HttpStatus.FOUND);
+		else
+			return new ResponseEntity<Project>(HttpStatus.NOT_FOUND);
 	}
 	
 	/**
@@ -62,10 +73,11 @@ public class ProjectController
 	 *@PathVariable annotation is used to bind the URI template variables to the handler method parameters
 	 *@return Project object
 	 **/
-	@PutMapping("/pms/project/updateProject/{id}")
-	public Project updateProject( @RequestBody Project project,@PathVariable Long id) 
+	@PutMapping(PmsURI.UPDATE_PROJECT)
+	public ResponseEntity<Project> updateProject(@RequestBody Project project,@PathVariable Long id) 
 	{
-		return projectServiceApi.updateProject(project,id);
+		Project updatedProject=projectServiceApi.updateProject(project,id);
+		return new ResponseEntity<Project>(updatedProject,HttpStatus.OK);
 	}
 	
 	/**
@@ -73,8 +85,9 @@ public class ProjectController
 	 *@DeleteMapping annotation for mapping HTTP DELETE requests onto specific handler methods
 	 *@PathVariable annotation is used to bind the URI template variables to the handler method parameters
 	 **/
-	@DeleteMapping("/pms/project/deleteProject/{id}")
-	public void deleteProject(@PathVariable Long id) {
+	@DeleteMapping(PmsURI.DELETE_PROJECT)
+	public ResponseEntity<Project> deleteProject(@PathVariable Long id) {
 	projectServiceApi.deleteProject(id);
+	return new ResponseEntity<Project>(HttpStatus.OK);
 	}
 }
