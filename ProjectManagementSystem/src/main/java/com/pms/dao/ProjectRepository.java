@@ -12,4 +12,6 @@ import com.pms.model.Project;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
+	
+	
 }

@@ -83,6 +83,7 @@ public class ProjectServiceImpl implements ProjectServiceApi {
 	@Override
 	public void deleteProject(Long id) {
 		// TODO Auto-generated method stub
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+id);
 		projectRepository.deleteById(id);
 	}
 
