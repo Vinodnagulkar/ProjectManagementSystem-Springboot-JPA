@@ -38,7 +38,6 @@ public class ProjectServiceImpl implements ProjectServiceApi {
 	 * */
 	@Override
 	public Project addProject(Project project) {
-		// TODO Auto-generated method stub
 		return projectRepository.save(project);
 	}
 
@@ -48,7 +47,6 @@ public class ProjectServiceImpl implements ProjectServiceApi {
 	 * */
 	@Override
 	public List<Project> getAllProjects() {
-		// TODO Auto-generated method stub
 		return projectRepository.findAll();
 	}
 
@@ -58,7 +56,6 @@ public class ProjectServiceImpl implements ProjectServiceApi {
 	 * */
 	@Override
 	public Optional<Project> getProjectById(Long id) {
-		// TODO Auto-generated method stub
 		return projectRepository.findById(id);
 	}
 	
@@ -67,9 +64,8 @@ public class ProjectServiceImpl implements ProjectServiceApi {
 	 * @return Project object
 	 * */
 	@Override
-	public Project updateProject(Project project,Long id) {
-		// TODO Auto-generated method stub
-		Project p=projectRepository.getOne(id);
+	public Project updateProject(Project project, Long id) {
+		Project p = projectRepository.getOne(id);
 		p.setProjectDiscription(project.getProjectDiscription());
 		p.setProjectName(project.getProjectName());
 		p.setProjectStartDate(project.getProjectStartDate());
@@ -82,8 +78,6 @@ public class ProjectServiceImpl implements ProjectServiceApi {
 	 * */
 	@Override
 	public void deleteProject(Long id) {
-		// TODO Auto-generated method stub
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+id);
 		projectRepository.deleteById(id);
 	}
 
