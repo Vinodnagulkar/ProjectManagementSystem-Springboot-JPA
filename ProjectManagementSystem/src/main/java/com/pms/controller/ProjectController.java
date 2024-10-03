@@ -22,6 +22,7 @@ import com.pms.util.PmsURI;
  * @author vinod.nagulkar
  */
 @RestController
+@RequestMapping("api/v1")
 @CrossOrigin(origins="http://localhost:4200")  
 public class ProjectController
 {
@@ -34,10 +35,9 @@ public class ProjectController
 	 * @RequestBody annotation binds the HTTPRequest body to the domain object.
 	 * */
 	@PostMapping(PmsURI.ADD_PROJECT)
-	public ResponseEntity<?> addProject(@RequestBody Project project) 
+	public ResponseEntity<Project> addProject(@RequestBody Project project) 
 	{
-		System.out.println(project);
-		 return new ResponseEntity<Project>(projectServiceApi.addProject(project),HttpStatus.OK);
+		 return new ResponseEntity<>(projectServiceApi.addProject(project),HttpStatus.OK);
 	}
 	
 	/** 
@@ -46,13 +46,13 @@ public class ProjectController
 	 *@return List of project objects
 	 * */
 	@GetMapping(PmsURI.GET_ALL_PROJECTS)
-	public ResponseEntity<?>getAllProjects()
+	public ResponseEntity<List<Project>>getAllProjects()
 	{
-		List<Project>projectList=projectServiceApi.getAllProjects();
+		List<Project>projectList = projectServiceApi.getAllProjects();
 		if(!projectList.isEmpty())
-		return new ResponseEntity<>(projectList,HttpStatus.OK);
+			return new ResponseEntity<>(projectList,HttpStatus.OK);
 		else
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	/** 
@@ -63,12 +63,11 @@ public class ProjectController
 	@GetMapping(PmsURI.GET_PROJECT)
 	public ResponseEntity<Optional<Project>> getProjectById(@PathVariable Long id) 
 	{
-		Optional<Project> project=projectServiceApi.getProjectById(id);
-		System.out.println(project+"************************");
+		Optional<Project> project = projectServiceApi.getProjectById(id);
 		if(project.isPresent()) 
-			return new ResponseEntity<Optional<Project>>(project,HttpStatus.FOUND);
+			return new ResponseEntity<>(project, HttpStatus.FOUND);
 		else
-			return new ResponseEntity<Optional<Project>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	/**
@@ -78,10 +77,10 @@ public class ProjectController
 	 *@return Project object
 	 **/
 	@PutMapping(PmsURI.UPDATE_PROJECT)
-	public ResponseEntity<Project> updateProject(@RequestBody Project project,@PathVariable Long id) 
+	public ResponseEntity<Project> updateProject(@RequestBody Project project, @PathVariable Long id) 
 	{
-		Project updatedProject=projectServiceApi.updateProject(project,id);
-		return new ResponseEntity<Project>(updatedProject,HttpStatus.OK);
+		Project updatedProject = projectServiceApi.updateProject(project, id);
+		return new ResponseEntity<>(updatedProject, HttpStatus.OK);
 	}
 	
 	/**
@@ -91,8 +90,7 @@ public class ProjectController
 	 **/
 	@DeleteMapping(PmsURI.DELETE_PROJECT)
 	public ResponseEntity<Project> deleteProject(@PathVariable Long id) {
-		System.out.println("=============================================="+id);
-	projectServiceApi.deleteProject(id);
-	return new ResponseEntity<Project>(HttpStatus.OK);
+		projectServiceApi.deleteProject(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
